@@ -15,7 +15,7 @@
 
 <b>x = [expression];</b>：将表达式<b>[expression]</b>的值赋值给<b>x</b>，表达式仅支持四则运算
 
-<b>print x;</b>：输出变量x的值
+<b>print [expression];</b>：输出表达式[expression]的值
 
 
 # 开发日志
