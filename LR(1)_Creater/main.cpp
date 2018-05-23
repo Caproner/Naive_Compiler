@@ -16,6 +16,9 @@ int main()
 	
 	G.Create_FIRST();
 	G.Create_FOLLOW();
+	
+	for(int i=0;i<G.Char_to_Number.size();i++)
+		cout<<i<<" "<<G.Number_to_Char[i]<<endl;
 
 	for(int i=1;i<G.FIRST.size();i++)
 	{
