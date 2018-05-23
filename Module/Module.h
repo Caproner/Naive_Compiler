@@ -5,14 +5,17 @@ class Word
 {
 	public:
 		int Number;	//单词的种类编号 
-		int Value;	//单词的内码值 
+		double Value;	//单词的内码值 
+		
+		//构造函数 
+		Word(int nn=0,double vv=0):Number(nn),Value(vv){} 
 };
 
 //单词列表类，用于作为词法分析的结果 
 class Word_List
 {
 	public:
-		vector<Word> v;
+		std::vector<Word> List;
 };
 
 //树结点类，用于语法树的组成 
@@ -20,7 +23,7 @@ class TreeNode
 {
 	public:
 		Word Node_Word;	//结点所对应的的单词 
-		vector<TreeNode*> Next;	//结点的儿子指针列表 
+		std::vector<TreeNode*> Next;	//结点的儿子指针列表 
 		TreeNode *Parent;	//结点的父亲指针 
 };
 
