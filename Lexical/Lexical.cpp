@@ -1,13 +1,14 @@
 #include "Lexical.h"
 
 #include <cstdio>
+#include <conio.h>
 
 //返回变量名的对应编号
 int Lexical::Get_Var_Number(std::string s)
 {
 	if(this->Symbol_Table[s]==0)
 	{
-		int num=this->Symbol_Table.size()+1;
+		int num=this->Symbol_Table.size();
 		this->Symbol_Table[s]=num;
 	}
 	return this->Symbol_Table[s];
@@ -96,14 +97,14 @@ Word Lexical::Get_Symbol(int &pos)
 {
 	switch(this->Source[pos])
 	{
-		case '+':return Word(5,0);break;
-		case '-':return Word(6,0);break;
-		case '*':return Word(7,0);break;
-		case '/':return Word(8,0);break;
-		case '=':return Word(9,0);break;
-		case '(':return Word(10,0);break;
-		case ')':return Word(11,0);break;
-		case ';':return Word(12,0);break;
+		case '+':pos++;return Word(5,0);break;
+		case '-':pos++;return Word(6,0);break;
+		case '*':pos++;return Word(7,0);break;
+		case '/':pos++;return Word(8,0);break;
+		case '=':pos++;return Word(9,0);break;
+		case '(':pos++;return Word(10,0);break;
+		case ')':pos++;return Word(11,0);break;
+		case ';':pos++;return Word(12,0);break;
 		default:return Word(-1,0);
 	}
 }
@@ -150,7 +151,6 @@ bool Lexical::Analysis()
 	int pos=0;
 	while(pos<this->Source.length())
 	{
-	//	printf("pos=%d\n",pos);
 		if(!isgraph(this->Source[pos]))
 		{
 			pos++;
