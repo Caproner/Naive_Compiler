@@ -9,7 +9,7 @@ int main()
 	L.init();
 	
 	string s;
-	while(cin>>s)
+	while(getline(cin,s))
 	{
 		L.Input(s);
 		if(L.Analysis())
