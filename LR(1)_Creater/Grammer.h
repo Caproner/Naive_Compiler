@@ -3,6 +3,7 @@
 #include <map>
 #include <string>
 #include <cctype>
+#include <cstdio>
 
 using namespace std;
 
@@ -77,8 +78,8 @@ class Grammer
 		
 		//表部分
 		
-		vector< vector<int> > ACTION;	//正数表示移进，负数表示归约，零表示acc 
-		vector< vector<int> > GOTO; 
+		map<pair<int,int>,int> ACTION;	//正数表示移进，负数表示归约，零表示acc
+		map<pair<int,int>,int> GOTO; 
 		
-		void Table_init();
+		void Table_init(FILE*);
 };

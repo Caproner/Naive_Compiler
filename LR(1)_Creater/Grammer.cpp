@@ -1,6 +1,4 @@
 #include "Grammer.h"
-#include <cstdio>
-#include <conio.h>
 
 bool Closure_Unit::operator ==(const Closure_Unit &p)const
 {
@@ -295,4 +293,42 @@ void Grammer::print(int i)
 		printf(", %c\n",this->Number_to_Char[CU.follow]);
 	}
 	printf("\n");
+}
+
+void Grammer::Table_init(FILE *fp)
+{
+	this->ACTION.clear();
+	this->GOTO.clear();
+	
+	for(int i=0;i<this->DFA_Node_Cnt;i++)
+	{
+		Closure C=this->DFA_Node[i];
+		for(set<Closure_Unit>::iterator it=C.Closure_Set.begin();it!=C.Closure_Set.end();it++)
+		{
+			Closure_Unit CU=*it;
+			if(CU.pos==CU.G.V.size())
+			{
+				printf("ACTION(%c,%d)=%d\n",this->Number_to_Char[CU.follow],i,-1*CU.num);
+				fprintf(fp,"ACTION(%c,%d)=%d\n",this->Number_to_Char[CU.follow],i,-1*CU.num);
+				this->ACTION[make_pair(CU.follow,i)]=-1*CU.num;
+			}
+		}
+		for(int j=0;j<this->DFA_Edge_Next[i].size();j++)
+		{
+			int Next=this->DFA_Edge_Next[i][j];
+			int W=this->DFA_Edge_W[i][j];
+			if(isupper(this->Number_to_Char[W]))
+			{
+				printf("GOTO(%c,%d)=%d\n",this->Number_to_Char[W],i,Next);
+				fprintf(fp,"GOTO(%c,%d)=%d\n",this->Number_to_Char[W],i,Next);
+				this->GOTO[make_pair(W,i)]=Next;
+			}
+			else
+			{
+				printf("ACTION(%c,%d)=%d\n",this->Number_to_Char[W],i,Next);
+				fprintf(fp,"ACTION(%c,%d)=%d\n",this->Number_to_Char[W],i,Next);
+				this->ACTION[make_pair(W,i)]=Next;
+			}
+		}
+	} 
 }

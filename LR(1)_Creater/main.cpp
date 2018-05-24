@@ -5,6 +5,7 @@ using namespace std;
 
 int main()
 {
+	FILE *fp=fopen("Analysis_Table.txt","w+");
 	Grammer G;
 	G.init();
 	string s;
@@ -17,9 +18,18 @@ int main()
 	G.Create_FIRST();
 	G.Create_FOLLOW();
 	
+	cout<<"字符在其中的编号为："<<endl;
+	
+	fprintf(fp,"%d\n",G.Char_to_Number.size());
+	
 	for(int i=0;i<G.Char_to_Number.size();i++)
+	{
 		cout<<i<<" "<<G.Number_to_Char[i]<<endl;
+		fprintf(fp,"%d %c\n",i,G.Number_to_Char[i]);
+	}
 
+	cout<<"每个字符的FIRST集为："<<endl;
+	
 	for(int i=1;i<G.FIRST.size();i++)
 	{
 		cout<<"FIRST("<<G.Number_to_Char[i]<<")={";
@@ -30,6 +40,8 @@ int main()
 		}
 		cout<<"}"<<endl;
 	}
+	
+	cout<<"每个字符的FOLLOW集为："<<endl;
 	
 	for(int i=1;i<G.FOLLOW.size();i++)
 	{
@@ -42,12 +54,20 @@ int main()
 		cout<<"}"<<endl;
 	}
 	
+	cout<<"DFA的边的信息为："<<endl;
+	
 	G.DFA_init();
-///	printf("!!!\n");
 	G.DFA_Build(0);
+	
+	cout<<"DFA每个结点的闭包的信息为："<<endl;
 	
 	for(int i=0;i<G.DFA_Node_Cnt;i++)
 	{
 		G.print(i);
 	}
+	
+	cout<<"最终生成的LR(1)分析表的信息为："<<endl;
+	
+	G.Table_init(fp);
+	fclose(fp);
 }
