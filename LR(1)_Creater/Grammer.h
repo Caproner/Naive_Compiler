@@ -21,6 +21,7 @@ class Closure_Unit
 		int pos;
 		int follow;
 		
+		bool operator ==(const Closure_Unit &)const;
 		bool operator <(const Closure_Unit &)const;
 		
 		void init(Grammer_Unit,int);
@@ -31,7 +32,8 @@ class Closure
 {
 	public:
 		set<Closure_Unit> Closure_Set;
-		int number;
+
+		bool operator ==(const Closure &)const;
 		
 		void init();
 		void Insert(Closure_Unit);
@@ -62,13 +64,16 @@ class Grammer
 		
 		//DFA部分
 		
-		vector<Closure> DFA_Node;
-		vector<int> DFA_Edge_Next;
-		vector<int> DFA_Edge_W; 
+		Closure DFA_Node[1005];
+		int DFA_Node_Cnt;
+		vector<int> DFA_Edge_Next[1005];
+		vector<int> DFA_Edge_W[1005]; 
 		
 		void Closure_Build(int);
 		void DFA_init();
 		void DFA_Build(int);
+		
+		void print(int);
 		
 		//表部分
 		

@@ -41,4 +41,13 @@ int main()
 		}
 		cout<<"}"<<endl;
 	}
+	
+	G.DFA_init();
+///	printf("!!!\n");
+	G.DFA_Build(0);
+	
+	for(int i=0;i<G.DFA_Node_Cnt;i++)
+	{
+		G.print(i);
+	}
 }

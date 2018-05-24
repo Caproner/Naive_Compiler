@@ -1,5 +1,14 @@
 #include "Grammer.h"
 #include <cstdio>
+#include <conio.h>
+
+bool Closure_Unit::operator ==(const Closure_Unit &p)const
+{
+	if(p.follow!=follow)return false;
+	if(p.num!=num)return false;
+	if(p.pos!=pos)return false;
+	return true;
+}
 
 bool Closure_Unit::operator <(const Closure_Unit &p)const
 {
@@ -23,6 +32,19 @@ bool Closure_Unit::Update(int C)
 	return true;
 }
 
+bool Closure::operator ==(const Closure &p)const
+{
+	set<Closure_Unit>::iterator it=Closure_Set.begin();
+	set<Closure_Unit>::iterator jt=p.Closure_Set.begin();
+	while(it!=Closure_Set.end())
+	{
+		if(jt==p.Closure_Set.end())return false;
+		if(!((*it)==(*jt)))return false;
+		it++;
+		jt++;
+	}
+	return true;
+}
 
 void Closure::init()
 {
@@ -122,6 +144,8 @@ void Grammer::Create_FIRST()
 			}
 		}
 	}
+	
+	this->FIRST[0].insert(0);
 }
 
 void Grammer::Create_FOLLOW()
@@ -161,6 +185,114 @@ void Grammer::Create_FOLLOW()
 	}
 }
 
+void Grammer::Closure_Build(int pos)
+{
+	bool flag=true;
+	Closure &C=this->DFA_Node[pos];
+	
+	while(flag)
+	{
+		flag=false;
+		vector<Closure_Unit> v;
+		for(set<Closure_Unit>::iterator it=C.Closure_Set.begin();it!=C.Closure_Set.end();it++)
+		{
+			Closure_Unit U=*it;
+			if(U.pos==U.G.V.size())continue;
+			int First_num;
+			if(U.pos==U.G.V.size()-1)First_num=U.follow;
+			else First_num=U.G.V[U.pos+1];
+			set<int> &st=this->FIRST[First_num];
+			for(int i=0;i<this->Grammer_List.size();i++)
+			{
+				Grammer_Unit GU=this->Grammer_List[i];
+				if(GU.U!=U.G.V[U.pos])continue;
+				for(set<int>::iterator jt=st.begin();jt!=st.end();jt++)
+				{
+					Closure_Unit CU;
+					CU.init(GU,*jt);
+					CU.num=i;
+					v.push_back(CU);
+				}
+			}
+		}
+		
+		for(int i=0;i<v.size();i++)
+		{
+			int sz=C.Closure_Set.size();
+			C.Closure_Set.insert(v[i]);
+			if(sz!=C.Closure_Set.size())flag=true;
+		}
+	}
+}
 
+void Grammer::DFA_init()
+{
+	for(int i=0;i<1005;i++)
+	{
+		this->DFA_Node[i].init();
+		this->DFA_Edge_W[i].clear();
+		this->DFA_Edge_Next[i].clear();
+	}
+	
+	Closure C;
+	C.init();
+	
+	Closure_Unit CU;
+	CU.init(this->Grammer_List[0],0);
+	CU.num=0;
+	C.Insert(CU);
+	
+	this->DFA_Node[0]=C;
+	this->Closure_Build(0);
+	this->DFA_Node_Cnt=1;
+}
 
+void Grammer::DFA_Build(int pos)
+{
+	Closure C=this->DFA_Node[pos];
+	for(int i=1;i<this->FIRST.size();i++)
+	{
+		Closure PC=C.Update(i);
+		if(PC.Closure_Set.size()==0)continue;
+		this->DFA_Node[this->DFA_Node_Cnt++]=PC;
+		int DFA_pos=this->DFA_Node_Cnt-1;
+		this->Closure_Build(DFA_pos);
+		
+		
+		bool flag=true;
+		for(int j=0;j<this->DFA_Node_Cnt-1;j++)
+		{
+			if(this->DFA_Node[j]==this->DFA_Node[DFA_pos])
+			{
+				DFA_pos=j;
+				this->DFA_Node_Cnt--;
+				flag=false;
+				break;
+			}
+		}
+		printf("%d--%c-->%d\n",pos,this->Number_to_Char[i],DFA_pos);
+		this->DFA_Edge_Next[pos].push_back(DFA_pos);
+		this->DFA_Edge_W[pos].push_back(i);
+		if(flag)
+			this->DFA_Build(DFA_pos);
+	}
+}
 
+void Grammer::print(int i)
+{
+	printf("Closure #%d\n",i);
+	Closure C=this->DFA_Node[i];
+	for(set<Closure_Unit>::iterator it=C.Closure_Set.begin();it!=C.Closure_Set.end();it++)
+	{
+		Closure_Unit CU=*it;
+		printf("%c-",this->Number_to_Char[CU.G.U]);
+		for(int j=0;j<CU.G.V.size();j++)
+		{
+			if(j==CU.pos)printf("¡¤");
+			printf("%c",this->Number_to_Char[CU.G.V[j]]);
+		}
+		if(CU.pos==CU.G.V.size())printf("¡¤");
+		printf(", %c\n",this->Number_to_Char[CU.follow]);
+	}
+	printf("\n");
+}
