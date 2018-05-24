@@ -20,12 +20,9 @@ int main()
 	
 	cout<<"字符在其中的编号为："<<endl;
 	
-	fprintf(fp,"%d\n",G.Char_to_Number.size());
-	
 	for(int i=0;i<G.Char_to_Number.size();i++)
 	{
 		cout<<i<<" "<<G.Number_to_Char[i]<<endl;
-		fprintf(fp,"%d %c\n",i,G.Number_to_Char[i]);
 	}
 
 	cout<<"每个字符的FIRST集为："<<endl;

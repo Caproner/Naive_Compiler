@@ -309,7 +309,7 @@ void Grammer::Table_init(FILE *fp)
 			if(CU.pos==CU.G.V.size())
 			{
 				printf("ACTION(%c,%d)=%d\n",this->Number_to_Char[CU.follow],i,-1*CU.num);
-				fprintf(fp,"ACTION(%c,%d)=%d\n",this->Number_to_Char[CU.follow],i,-1*CU.num);
+				fprintf(fp,"A %c %d %d\n",this->Number_to_Char[CU.follow],i,-1*CU.num);
 				this->ACTION[make_pair(CU.follow,i)]=-1*CU.num;
 			}
 		}
@@ -320,13 +320,13 @@ void Grammer::Table_init(FILE *fp)
 			if(isupper(this->Number_to_Char[W]))
 			{
 				printf("GOTO(%c,%d)=%d\n",this->Number_to_Char[W],i,Next);
-				fprintf(fp,"GOTO(%c,%d)=%d\n",this->Number_to_Char[W],i,Next);
+				fprintf(fp,"G %c %d %d\n",this->Number_to_Char[W],i,Next);
 				this->GOTO[make_pair(W,i)]=Next;
 			}
 			else
 			{
 				printf("ACTION(%c,%d)=%d\n",this->Number_to_Char[W],i,Next);
-				fprintf(fp,"ACTION(%c,%d)=%d\n",this->Number_to_Char[W],i,Next);
+				fprintf(fp,"A %c %d %d\n",this->Number_to_Char[W],i,Next);
 				this->ACTION[make_pair(W,i)]=Next;
 			}
 		}
