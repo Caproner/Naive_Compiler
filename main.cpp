@@ -12,18 +12,17 @@ int main()
 	while(getline(cin,s))
 	{
 		L.Input(s);
-		if(L.Analysis())
+		if(!L.Analysis())
 		{
-			Word_List ret=L.Output();
-			for(int i=0;i<ret.List.size();i++)
-			{
-				cout<<"["<<ret.List[i].Number<<","<<ret.List[i].Value<<"]"<<endl;
-			}
-			cout<<"End"<<endl;
+			cout<<"Error£º´Ê·¨·ÖÎö³ö´í"<<endl;
+			continue;
 		}
-		else
+		
+		Word_List ret=L.Output();
+		for(int i=0;i<ret.List.size();i++)
 		{
-			cout<<"Error!"<<endl;
+			cout<<"["<<ret.List[i].Number<<","<<ret.List[i].Value<<"]"<<endl;
 		}
+		cout<<"End"<<endl;
 	}
 }
