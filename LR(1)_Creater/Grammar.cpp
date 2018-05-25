@@ -1,4 +1,4 @@
-#include "Grammer.h"
+#include "Grammar.h"
 
 bool Closure_Unit::operator ==(const Closure_Unit &p)const
 {
@@ -15,7 +15,7 @@ bool Closure_Unit::operator <(const Closure_Unit &p)const
 	return follow<p.follow;
 }
 
-void Closure_Unit::init(Grammer_Unit g,int f)
+void Closure_Unit::init(Grammar_Unit g,int f)
 {
 	this->G=g;
 	this->pos=0;
@@ -67,7 +67,7 @@ Closure Closure::Update(int C)
 	return ret;
 }
 
-bool Grammer::Add_Set(set<int> &S,set<int> &s)
+bool Grammar::Add_Set(set<int> &S,set<int> &s)
 {
 	bool ret=false;
 	for(set<int>::iterator it=s.begin();it!=s.end();it++)
@@ -79,7 +79,7 @@ bool Grammer::Add_Set(set<int> &S,set<int> &s)
 	return ret;
 }
 
-int Grammer::Find(char c)
+int Grammar::Find(char c)
 {
 	if(this->Char_to_Number[c]==0)
 	{
@@ -90,25 +90,25 @@ int Grammer::Find(char c)
 	return this->Char_to_Number[c];
 }
 
-void Grammer::init()
+void Grammar::init()
 {
-	this->Grammer_List.clear();
+	this->Grammar_List.clear();
 	this->Number_to_Char.clear();
 	this->Char_to_Number.clear();
 	this->Number_to_Char[0]='#';
 	this->Char_to_Number['#']=0;
 }
 
-void Grammer::Push_Back(string s)
+void Grammar::Push_Back(string s)
 {
-	Grammer_Unit GU;
+	Grammar_Unit GU;
 	GU.U=this->Find(s[0]);
 	for(int i=2;i<s.length();i++)
 		GU.V.push_back(this->Find(s[i]));
-	this->Grammer_List.push_back(GU);
+	this->Grammar_List.push_back(GU);
 }
 
-void Grammer::Create_FIRST()
+void Grammar::Create_FIRST()
 {
 	this->FIRST.clear();
 	for(int i=0;i<this->Char_to_Number.size();i++)
@@ -125,10 +125,10 @@ void Grammer::Create_FIRST()
 	while(flag)
 	{
 		flag=false;
-		for(int i=0;i<this->Grammer_List.size();i++)
+		for(int i=0;i<this->Grammar_List.size();i++)
 		{
-			int u=this->Grammer_List[i].U;
-			int v=this->Grammer_List[i].V[0];
+			int u=this->Grammar_List[i].U;
+			int v=this->Grammar_List[i].V[0];
 			if(!isupper(this->Number_to_Char[v]))
 			{
 				if(this->FIRST[u].find(v)!=this->FIRST[u].end())continue;
@@ -146,7 +146,7 @@ void Grammer::Create_FIRST()
 	this->FIRST[0].insert(0);
 }
 
-void Grammer::Create_FOLLOW()
+void Grammar::Create_FOLLOW()
 {
 	this->FOLLOW.clear();
 	for(int i=0;i<this->Char_to_Number.size();i++)
@@ -161,21 +161,21 @@ void Grammer::Create_FOLLOW()
 	while(flag)
 	{
 		flag=false;
-		for(int i=0;i<this->Grammer_List.size();i++)
+		for(int i=0;i<this->Grammar_List.size();i++)
 		{
-			int u=this->Grammer_List[i].U;
-			for(int j=0;j<this->Grammer_List[i].V.size();j++)
+			int u=this->Grammar_List[i].U;
+			for(int j=0;j<this->Grammar_List[i].V.size();j++)
 			{
-				int v=this->Grammer_List[i].V[j];
+				int v=this->Grammar_List[i].V[j];
 				if(!isupper(this->Number_to_Char[v]))continue;
-				if(j==this->Grammer_List[i].V.size()-1)
+				if(j==this->Grammar_List[i].V.size()-1)
 				{
 					if(u==v)continue;
 					flag=flag|this->Add_Set(this->FOLLOW[v],this->FOLLOW[u]);
 				}
 				else
 				{
-					int vv=this->Grammer_List[i].V[j+1];
+					int vv=this->Grammar_List[i].V[j+1];
 					flag=flag|this->Add_Set(this->FOLLOW[v],this->FIRST[vv]);
 				}
 			}
@@ -183,7 +183,7 @@ void Grammer::Create_FOLLOW()
 	}
 }
 
-void Grammer::Closure_Build(int pos)
+void Grammar::Closure_Build(int pos)
 {
 	bool flag=true;
 	Closure &C=this->DFA_Node[pos];
@@ -200,9 +200,9 @@ void Grammer::Closure_Build(int pos)
 			if(U.pos==U.G.V.size()-1)First_num=U.follow;
 			else First_num=U.G.V[U.pos+1];
 			set<int> &st=this->FIRST[First_num];
-			for(int i=0;i<this->Grammer_List.size();i++)
+			for(int i=0;i<this->Grammar_List.size();i++)
 			{
-				Grammer_Unit GU=this->Grammer_List[i];
+				Grammar_Unit GU=this->Grammar_List[i];
 				if(GU.U!=U.G.V[U.pos])continue;
 				for(set<int>::iterator jt=st.begin();jt!=st.end();jt++)
 				{
@@ -223,7 +223,7 @@ void Grammer::Closure_Build(int pos)
 	}
 }
 
-void Grammer::DFA_init()
+void Grammar::DFA_init()
 {
 	for(int i=0;i<1005;i++)
 	{
@@ -236,7 +236,7 @@ void Grammer::DFA_init()
 	C.init();
 	
 	Closure_Unit CU;
-	CU.init(this->Grammer_List[0],0);
+	CU.init(this->Grammar_List[0],0);
 	CU.num=0;
 	C.Insert(CU);
 	
@@ -245,7 +245,7 @@ void Grammer::DFA_init()
 	this->DFA_Node_Cnt=1;
 }
 
-void Grammer::DFA_Build(int pos)
+void Grammar::DFA_Build(int pos)
 {
 	Closure C=this->DFA_Node[pos];
 	for(int i=1;i<this->FIRST.size();i++)
@@ -276,7 +276,7 @@ void Grammer::DFA_Build(int pos)
 	}
 }
 
-void Grammer::print(int i)
+void Grammar::print(int i)
 {
 	printf("Closure #%d\n",i);
 	Closure C=this->DFA_Node[i];
@@ -295,7 +295,7 @@ void Grammer::print(int i)
 	printf("\n");
 }
 
-void Grammer::Table_init(FILE *fp)
+void Grammar::Table_init(FILE *fp)
 {
 	this->ACTION.clear();
 	this->GOTO.clear();

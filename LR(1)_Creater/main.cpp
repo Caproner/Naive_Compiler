@@ -1,4 +1,4 @@
-#include "Grammer.h"
+#include "Grammar.h"
 #include <iostream>
 
 using namespace std;
@@ -6,7 +6,7 @@ using namespace std;
 int main()
 {
 	FILE *fp=fopen("Analysis_Table.txt","w+");
-	Grammer G;
+	Grammar G;
 	G.init();
 	string s;
 	

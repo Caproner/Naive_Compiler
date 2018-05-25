@@ -7,7 +7,7 @@
 
 using namespace std;
 
-class Grammer_Unit
+class Grammar_Unit
 {
 	public:
 		int U;
@@ -18,14 +18,14 @@ class Closure_Unit
 {
 	public:
 		int num;
-		Grammer_Unit G;
+		Grammar_Unit G;
 		int pos;
 		int follow;
 		
 		bool operator ==(const Closure_Unit &)const;
 		bool operator <(const Closure_Unit &)const;
 		
-		void init(Grammer_Unit,int);
+		void init(Grammar_Unit,int);
 		bool Update(int);
 };
 
@@ -41,13 +41,13 @@ class Closure
 		Closure Update(int);
 };
 
-class Grammer
+class Grammar
 {
 	public:
 		
 		//输入和预处理部分 
 		
-		vector<Grammer_Unit> Grammer_List;
+		vector<Grammar_Unit> Grammar_List;
 		
 		map<char,int> Char_to_Number;
 		map<int,char> Number_to_Char;
