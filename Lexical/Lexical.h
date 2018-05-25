@@ -10,6 +10,7 @@ class Lexical
 	private:
 		
 		std::string Source;	//用于存储读入的源代码 
+		
 		Word_List Target;	//用于存储转换后的单词列表
 		
 		std::map<std::string,int> Symbol_Table;	//用于存储变量名符号表 
@@ -29,7 +30,10 @@ class Lexical
 	public:
 		
 		void init();	//初始化函数 
+		
 		void Input(std::string);	//读入函数，用于读入源代码并初始化 
+		
 		bool Analysis();	//对源代码进行词法分析 
+		
 		Word_List Output();	//返回单词列表 
 };

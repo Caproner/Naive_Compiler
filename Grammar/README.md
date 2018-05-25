@@ -15,7 +15,7 @@
 S→vx
 S→x=E
 S→vx=E
-S→px
+S→pE
 E→E+T
 E→E-T
 E→T

@@ -4,8 +4,8 @@
 CPP      = g++.exe
 CC       = gcc.exe
 WINDRES  = windres.exe
-OBJ      = main.o Lexical/Lexical.o
-LINKOBJ  = main.o Lexical/Lexical.o
+OBJ      = main.o Lexical/Lexical.o Grammar/Grammar.o
+LINKOBJ  = main.o Lexical/Lexical.o Grammar/Grammar.o
 LIBS     = -L"E:/Dev-Cpp/MinGW64/lib" -L"E:/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc
 INCS     = -I"E:/Dev-Cpp/MinGW64/include" -I"E:/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"E:/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.8.1/include"
 CXXINCS  = -I"E:/Dev-Cpp/MinGW64/include" -I"E:/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"E:/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.8.1/include" -I"E:/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.8.1/include/c++"
@@ -29,3 +29,6 @@ main.o: main.cpp
 
 Lexical/Lexical.o: Lexical/Lexical.cpp
 	$(CPP) -c Lexical/Lexical.cpp -o Lexical/Lexical.o $(CXXFLAGS)
+
+Grammar/Grammar.o: Grammar/Grammar.cpp
+	$(CPP) -c Grammar/Grammar.cpp -o Grammar/Grammar.o $(CXXFLAGS)

@@ -1,7 +1,5 @@
 #include "Lexical.h"
 
-#include <cstdio>
-#include <conio.h>
 
 //返回变量名的对应编号
 int Lexical::Get_Var_Number(std::string s)

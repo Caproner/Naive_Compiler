@@ -51,7 +51,7 @@ AutoIncBuildNr=0
 SyncProduct=1
 
 [Unit2]
-FileName=Grammer.h
+FileName=Grammar.h
 CompileCpp=1
 Folder=
 Compile=1
@@ -61,7 +61,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit3]
-FileName=Grammer.cpp
+FileName=Grammar.cpp
 CompileCpp=1
 Folder=
 Compile=1

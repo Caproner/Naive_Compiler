@@ -1,5 +1,8 @@
 #include <vector>
 
+#ifndef MODULE
+#define MODULE
+
 //单词类，用于词法分析中的单词划分 
 class Word
 {
@@ -27,9 +30,11 @@ class TreeNode
 		TreeNode *Parent;	//结点的父亲指针 
 };
 
-//语法树类，用于作为语法分析的结果 
-class Tree
+//语法森林类，用于存储多个语法树，用于作为语法分析的结果 
+class Forest
 {
 	public:
-		TreeNode *root;	//树的根结点 
+		std::vector<TreeNode*> forest;
 };
+
+#endif
