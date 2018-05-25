@@ -10,10 +10,16 @@ int main()
 	G.init();
 	string s;
 	
+	vector<string> Grammar_List;
+	
 	while(cin>>s)
 	{
 		G.Push_Back(s);
+		Grammar_List.push_back(s);
 	}
+	fprintf(fp,"%d\n",Grammar_List.size());
+	for(int i=0;i<Grammar_List.size();i++)
+		fprintf(fp,"%s\n",Grammar_List[i].c_str());
 	
 	G.Create_FIRST();
 	G.Create_FOLLOW();

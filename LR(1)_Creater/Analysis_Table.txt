@@ -1,3 +1,18 @@
+14
+X-S
+S-vx
+S-x=E
+S-vx=E
+S-px
+E-E+T
+E-E-T
+E-T
+T-T*F
+T-T/F
+T-F
+F-(E)
+F-x
+F-c
 G S 0 1
 A v 0 2
 A x 0 36
