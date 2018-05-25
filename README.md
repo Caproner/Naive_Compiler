@@ -12,6 +12,15 @@
 + ``x = [expression];``：将表达式``[expression]``的值赋值给``x``，表达式仅支持四则运算
 + ``print [expression];``：输出表达式``[expression]``的值
 
+# 使用方法
+
++ 打开``Naive_Compiler.exe``，或者自行修改``Makefile.win``编译生成``Naive_Compiler.exe``。
++ 每次输入一行代码，以分号为结尾，也可以一行输入多个以分号结尾的语句
+    - 例如``var x=2;``或者``x=x+2;y=y+3;``
++ 回车之后编译器便会编译代码，若为print语句则会输出对应结果
++ 若输入语句有错误的话，编译器会给出报错（只能报``词法分析出错``，``语法分析出错``，``语义分析出错``这三种）
++ 若需要查看编译过程的中间生成信息，则需要消除``main.cpp``和``Grammar/Grammar.cpp``中对``#define TEST``的注释
+
 
 # 进度
 
