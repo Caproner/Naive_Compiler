@@ -34,6 +34,9 @@ int main()
 	Grammar G;
 	G.init();
 	
+	Semantic S;
+	S.init();
+	
 	string s;
 	while(getline(cin,s))
 	{
@@ -69,6 +72,12 @@ int main()
 		}
 		cout<<"语法分析结束"<<endl;
 		#endif
+		
+		if(!S.Analysis(F))
+		{
+			cout<<"Error：语义分析出错"<<endl;
+			continue; 
+		}
 	}
 	
 }

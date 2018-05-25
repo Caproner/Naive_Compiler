@@ -27,8 +27,6 @@ class Grammar
 		
 		std::map<int,char> Number_to_Symbol;	//从种别编码映射到非终结字符的映射 
 		
-		void Delete(TreeNode*);	//递归删除树 
-		
 		bool Handle_Analysis(int);	//对第pos个语句进行语法分析，并生成语法树加入森林 
 		 
 	public:
@@ -40,4 +38,6 @@ class Grammar
 		bool Analysis();	//对单词列表进行语法分析
 		
 		Forest Output();	//返回语法森林 
+		
+		void Delete(TreeNode*);	//递归删除树 
 };
