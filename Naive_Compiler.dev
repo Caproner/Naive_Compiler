@@ -29,7 +29,7 @@ IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=0
 CompilerSettings=0000000000000000000000000
-UnitCount=6
+UnitCount=8
 
 [VersionInfo]
 Major=1
@@ -102,6 +102,26 @@ BuildCmd=
 
 [Unit6]
 FileName=Grammar\Grammar.cpp
+CompileCpp=1
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit7]
+FileName=Semantic\Semantic.h
+CompileCpp=1
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit8]
+FileName=Semantic\Semantic.cpp
 CompileCpp=1
 Folder=
 Compile=1
