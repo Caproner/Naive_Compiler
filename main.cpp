@@ -4,7 +4,7 @@
 
 #include <iostream>
 
-#define TEST
+//#define TEST
 
 using namespace std;
 
@@ -78,6 +78,15 @@ int main()
 			cout<<"Error：语义分析出错"<<endl;
 			continue; 
 		}
+		
+		#ifdef TEST
+		for(int i=0;i<F.forest.size();i++)
+		{
+			cout<<"输出第"<<i+1<<"棵语法树"<<endl;
+			print(F.forest[i]);
+		}
+		cout<<"语义分析结束"<<endl;
+		#endif
 	}
 	
 }

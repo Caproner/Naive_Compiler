@@ -1,6 +1,6 @@
 #include "Grammar.h"
 
-#define TEST
+//#define TEST
 
 void Grammar::Delete(TreeNode *p)
 {

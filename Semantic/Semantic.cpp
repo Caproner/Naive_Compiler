@@ -32,10 +32,18 @@ bool Semantic::DFS(TreeNode *p)
 		}
 		else
 		{
-			if(this->Var_Space.find(b->Node_Word.Value)==this->Var_Space.end())
-				return false;
-			printf("%lf\n",this->Var_Space[b->Node_Word.Value]);
-			return true;
+			if(b->Node_Word.Number==3)
+			{
+				if(this->Var_Space.find(b->Node_Word.Value)==this->Var_Space.end())
+					return false;
+				printf("%lf\n",this->Var_Space[b->Node_Word.Value]);
+				return true;
+			}
+			else
+			{
+				printf("%lf\n",b->Node_Word.Value);
+				return true;
+			}
 		}
 	}
 	
@@ -71,16 +79,16 @@ bool Semantic::DFS(TreeNode *p)
 			c->Node_Word.Number=4;
 			c->Node_Word.Value=this->Var_Space[c->Node_Word.Value];
 		}
-		if((b.Node_Word.Number==8)&&(c->Node_Word.Value==0))return false;
+		if((b->Node_Word.Number==8)&&(c->Node_Word.Value==0))return false;
 		p->Node_Word.Number=4;
-		if(b.Node_Word.Number==5)
-			p->Node_Word.Value=a.Node_Word.Value+c.Node_Word.Value;
-		if(b.Node_Word.Number==6)
-			p->Node_Word.Value=a.Node_Word.Value-c.Node_Word.Value;
-		if(b.Node_Word.Number==7)
-			p->Node_Word.Value=a.Node_Word.Value*c.Node_Word.Value;
-		if(b.Node_Word.Number==8)
-			p->Node_Word.Value=a.Node_Word.Value/c.Node_Word.Value;
+		if(b->Node_Word.Number==5)
+			p->Node_Word.Value=a->Node_Word.Value+c->Node_Word.Value;
+		if(b->Node_Word.Number==6)
+			p->Node_Word.Value=a->Node_Word.Value-c->Node_Word.Value;
+		if(b->Node_Word.Number==7)
+			p->Node_Word.Value=a->Node_Word.Value*c->Node_Word.Value;
+		if(b->Node_Word.Number==8)
+			p->Node_Word.Value=a->Node_Word.Value/c->Node_Word.Value;
 		return true;
 	}
 	
