@@ -1,7 +1,10 @@
 #include "Lexical/Lexical.h"
 #include "Grammar/Grammar.h"
+#include "Semantic/Semantic.h"
 
 #include <iostream>
+
+#define TEST
 
 using namespace std;
 
@@ -42,11 +45,13 @@ int main()
 		}
 		
 		Word_List WL=L.Output();
+		#ifdef TEST
 		for(int i=0;i<WL.List.size();i++)
 		{
 			cout<<"["<<WL.List[i].Number<<","<<WL.List[i].Value<<"]"<<endl;
 		}
 		cout<<"词法分析结束"<<endl;
+		#endif
 		
 		G.Input(WL);
 		if(!G.Analysis())
@@ -56,12 +61,14 @@ int main()
 		}
 		
 		Forest F=G.Output();
+		#ifdef TEST
 		for(int i=0;i<F.forest.size();i++)
 		{
 			cout<<"输出第"<<i+1<<"棵语法树"<<endl;
 			print(F.forest[i]);
 		}
 		cout<<"语法分析结束"<<endl;
+		#endif
 	}
 	
 }
