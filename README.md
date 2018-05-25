@@ -6,13 +6,13 @@
 
 其作用仅限于可以进行变量定义，赋值，计算，和输出。
 
-# 指令集（暂定）
+## 指令集（暂定）
 
 + ``var x;``：定义变量x（浮点型），初值默认为0。也可以写为``var x = [expression];``的形式
-+ ``x = [expression];``：将表达式``[expression]``的值赋值给``x``，表达式仅支持四则运算
++ ``x = [expression];``：将表达式``[expression]``的值赋值给``x``，表达式仅支持带小括号的四则运算
 + ``print [expression];``：输出表达式``[expression]``的值
 
-# 使用方法
+## 使用方法
 
 + 打开``Naive_Compiler.exe``，或者自行修改``Makefile.win``编译生成``Naive_Compiler.exe``。
 + 每次输入一行代码，以分号为结尾，也可以一行输入多个以分号结尾的语句
@@ -22,7 +22,7 @@
 + 若需要查看编译过程的中间生成信息，则需要消除``main.cpp``和``Grammar/Grammar.cpp``中对``#define TEST``的注释
 
 
-# 进度
+## 进度
 
 - [x] **Naive_Compiler开发**
     - [x] 词法分析
