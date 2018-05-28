@@ -26,7 +26,9 @@ void print(TreeNode *p)
 	}
 }
 
-int main()
+char Read[100005];
+
+int main(int argc,char *argv[])
 {
 	Lexical L;
 	L.init();
@@ -37,9 +39,21 @@ int main()
 	Semantic S;
 	S.init();
 	
+	FILE *Input;
+	if(argc!=1)Input=fopen(argv[1],"r");
+	
 	string s;
-	while(getline(cin,s))
+	while(true)
 	{
+		if(argc==1)
+		{
+			if(!getline(cin,s))break;
+		}
+		else
+		{
+			if(fgets(Read,100000,Input)==NULL)break;
+			s=Read;
+		}
 		L.Input(s);
 		if(!L.Analysis())
 		{

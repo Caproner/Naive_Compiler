@@ -1,0 +1,10 @@
+var x=2;
+x=x+x;
+x=x*x;
+print x;
+var y=x-1;
+print y;
+print x*y;
+print 2-1;
+var cap=10000;
+print cap;
