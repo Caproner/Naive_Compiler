@@ -8,5 +8,5 @@ $(project) : $(objects)
 .PHONY : clean
 
 clean:
-	rm $(project) $(objects)
+	-rm $(project) $(objects)
 
