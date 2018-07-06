@@ -41,6 +41,7 @@ int main(int argc,char *argv[])
 	
 	FILE *Input;
 	if(argc!=1)Input=fopen(argv[1],"r");
+	else cout<<"[Naive by Caproner]\nWelcome to use Naive_C!\n > ";
 	
 	string s;
 	while(true)
@@ -57,7 +58,7 @@ int main(int argc,char *argv[])
 		L.Input(s);
 		if(!L.Analysis())
 		{
-			cout<<"Error£º´Ê·¨·ÖÎö³ö´í"<<endl;
+			cout<<"Errorï¼šè¯æ³•åˆ†æžå‡ºé”™"<<endl<<" > ";
 			continue;
 		}
 		
@@ -67,13 +68,13 @@ int main(int argc,char *argv[])
 		{
 			cout<<"["<<WL.List[i].Number<<","<<WL.List[i].Value<<"]"<<endl;
 		}
-		cout<<"´Ê·¨·ÖÎö½áÊø"<<endl;
+		cout<<"è¯æ³•åˆ†æžç»“æŸ"<<endl;
 		#endif
 		
 		G.Input(WL);
 		if(!G.Analysis())
 		{
-			cout<<"Error£ºÓï·¨·ÖÎö³ö´í"<<endl;
+			cout<<"Errorï¼šè¯­æ³•åˆ†æžå‡ºé”™"<<endl<<" > ";
 			continue;
 		}
 		
@@ -81,26 +82,27 @@ int main(int argc,char *argv[])
 		#ifdef TEST
 		for(int i=0;i<F.forest.size();i++)
 		{
-			cout<<"Êä³öµÚ"<<i+1<<"¿ÃÓï·¨Ê÷"<<endl;
+			cout<<"è¾“å‡ºç¬¬"<<i+1<<"æ£µè¯­æ³•æ ‘"<<endl;
 			print(F.forest[i]);
 		}
-		cout<<"Óï·¨·ÖÎö½áÊø"<<endl;
+		cout<<"è¯­æ³•åˆ†æžç»“æŸ"<<endl;
 		#endif
 		
 		if(!S.Analysis(F))
 		{
-			cout<<"Error£ºÓïÒå·ÖÎö³ö´í"<<endl;
+			cout<<"Errorï¼šè¯­ä¹‰åˆ†æžå‡ºé”™"<<endl<<" > ";
 			continue; 
 		}
 		
 		#ifdef TEST
 		for(int i=0;i<F.forest.size();i++)
 		{
-			cout<<"Êä³öµÚ"<<i+1<<"¿ÃÓï·¨Ê÷"<<endl;
+			cout<<"è¾“å‡ºç¬¬"<<i+1<<"æ£µè¯­æ³•æ ‘"<<endl;
 			print(F.forest[i]);
 		}
-		cout<<"ÓïÒå·ÖÎö½áÊø"<<endl;
+		cout<<"è¯­ä¹‰åˆ†æžç»“æŸ"<<endl;
 		#endif
+		cout<<" > ";
 	}
 	
 }
