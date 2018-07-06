@@ -1,6 +1,6 @@
-objects = main.o Lexical/Lexical.o Grammar/Grammar.o Semantic/Semantic.o
+objects = main.o Grammar.o
 
-project = Naive
+project = LR\(1\)_Creater
 
 $(project) : $(objects)
 	g++ -o $(project) $(objects)
